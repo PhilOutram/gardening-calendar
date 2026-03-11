@@ -576,6 +576,7 @@ function renderCalendar() {
     html += `<div class="cal-section-label">${label}</div>`;
 
     group.forEach(plant => {
+      // cal-row uses display:contents so its children slot directly into the parent grid
       html += `<div class="cal-row">`;
       html += `<div class="cal-plant-name" onclick="openPlantPopup('${plant.id}')">
                  <span class="plant-type-dot dot-${plant.type}"></span>
