@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garden Planner — Seasonal Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-leaf">🌿</span>
+        <span class="logo-text">Garden Planner</span>
+      </div>
+      <nav class="main-nav">
+        <button class="nav-btn active" id="btn-calendar" onclick="showPage('calendar')">Calendar</button>
+        <button class="nav-btn" id="btn-settings" onclick="showPage('settings')">⚙ Settings</button>
+        <button class="nav-btn nav-btn-info" onclick="openInfoPopup()">ℹ Info</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== CALENDAR PAGE ===== -->
+  <main id="page-calendar" class="page active">
+
+    <section class="calendar-intro">
+      <h1>Seasonal Gardening Calendar</h1>
+      <p class="subtitle">Your year at a glance — click any plant bar or month for details.</p>
+      <div class="legend">
+        <span class="legend-item"><span class="swatch sow-indoor"></span>Sow Indoors</span>
+        <span class="legend-item"><span class="swatch sow-outdoor"></span>Sow Outdoors</span>
+        <span class="legend-item"><span class="swatch bloom"></span>Bloom</span>
+        <span class="legend-item"><span class="swatch harvest"></span>Harvest</span>
+      </div>
+    </section>
+
+    <section class="calendar-section">
+      <div class="calendar-scroll-wrapper">
+        <div class="calendar-grid" id="calendar-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== SETTINGS PAGE ===== -->
+  <main id="page-settings" class="page">
+    <section class="settings-header">
+      <h1>Plant Settings</h1>
+      <p class="subtitle">Choose which plants appear on your calendar, or add your own.</p>
+    </section>
+
+    <div class="settings-layout">
+
+      <!-- Filter controls -->
+      <div class="settings-filters">
+        <button class="filter-btn active" onclick="filterSettings('all')">All</button>
+        <button class="filter-btn" onclick="filterSettings('flower')">🌸 Flowers</button>
+        <button class="filter-btn" onclick="filterSettings('vegetable')">🥕 Vegetables</button>
+        <button class="filter-btn" onclick="filterSettings('herb')">🌿 Herbs</button>
+        <div class="bulk-btns">
+          <button class="btn-sm" onclick="selectAll(true)">Select all</button>
+          <button class="btn-sm" onclick="selectAll(false)">Clear all</button>
+        </div>
+      </div>
+
+      <div id="plant-list" class="plant-list">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Add Plant Form -->
+      <div class="add-plant-card">
+        <h2>Add a New Plant</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="new-name">Plant Name *</label>
+            <input type="text" id="new-name" placeholder="e.g. Basil" />
+          </div>
+          <div class="form-group">
+            <label for="new-type">Type *</label>
+            <select id="new-type">
+              <option value="flower">Flower</option>
+              <option value="vegetable">Vegetable</option>
+              <option value="herb">Herb</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Sow Indoors (select months)</label>
+            <div class="month-picker" id="pick-sow-indoor"></div>
+          </div>
+          <div class="form-group full-width">
+            <label>Sow Outdoors (select months)</label>
+            <div class="month-picker" id="pick-sow-outdoor"></div>
+          </div>
+          <div class="form-group full-width">
+            <label>Bloom Months</label>
+            <div class="month-picker" id="pick-bloom"></div>
+          </div>
+          <div class="form-group full-width">
+            <label>Harvest Months</label>
+            <div class="month-picker" id="pick-harvest"></div>
+          </div>
+          <div class="form-group full-width">
+            <label for="new-instructions">Growing Instructions</label>
+            <textarea id="new-instructions" rows="3" placeholder="General care, spacing, notes…"></textarea>
+          </div>
+        </div>
+        <button class="btn-add" onclick="addPlant()">+ Add to Calendar</button>
+        <p id="add-error" class="form-error"></p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== POPUP OVERLAY ===== -->
+  <div id="overlay" class="overlay hidden" onclick="closePopup()"></div>
+
+  <div id="popup" class="popup hidden">
+    <button class="popup-close" onclick="closePopup()">✕</button>
+    <div id="popup-content"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
